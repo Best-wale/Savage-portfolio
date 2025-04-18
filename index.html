@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Photography Portfolio</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: {
+                                DEFAULT: '#5D5CDE',
+                                dark: '#4D4CBE',
+                                light: '#7D7CEE'
+                            }
+                        },
+                        spacing: {
+                            '128': '32rem',
+                        }
+                    }
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+
+    <body class="bg-white dark:bg-gray-900 min-h-screen transition-colors duration-200">
+        <!-- Header -->
+        <header class="relative">
+            <!-- Background image for header -->
+            <div class="absolute inset-0 bg-black opacity-50 z-0"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent opacity-60 z-0">
+            </div>
+
+            <div id="header-background" class="h-[50vh] bg-cover bg-center"
+                style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80')">
+            </div>
+
+            <div class="absolute top-0 left-0 w-full p-4 z-10">
+                <nav class="container mx-auto flex justify-between items-center">
+                    <a href="#" class="text-white text-2xl font-bold">Savage Photography</a>
+                    <div class="flex items-center space-x-4">
+                        <button id="theme-toggle" class="text-white p-2 rounded-full hover:bg-gray-800/30">
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:inline"></i>
+                        </button>
+                        <button id="mobile-menu-button" class="lg:hidden text-white">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <div id="desktop-menu" class="hidden lg:flex space-x-6 text-white">
+                            <a href="#" class="hover:text-primary-light transition-colors">Home</a>
+                            <a href="#gallery" class="hover:text-primary-light transition-colors">Gallery</a>
+                            <a href="#about" class="hover:text-primary-light transition-colors">About</a>
+                            <a href="#contact" class="hover:text-primary-light transition-colors">Contact</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="absolute bottom-0 left-0 w-full p-8 z-10">
+                <div class="container mx-auto">
+                    <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight">Capturing moments<br>that last
+                        forever</h1>
+                    <p class="text-white text-lg mt-4 max-w-xl">Professional photographer specializing in landscapes,
+                        portraits, and wildlife photography.</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu"
+            class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex-col justify-center items-center">
+            <button id="close-menu" class="absolute top-4 right-4 text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+            <nav class="flex flex-col space-y-6 text-white text-2xl text-center">
+                <a href="#" class="hover:text-primary-light transition-colors">Home</a>
+                <a href="#gallery" class="hover:text-primary-light transition-colors">Gallery</a>
+                <a href="#about" class="hover:text-primary-light transition-colors">About</a>
+                <a href="#contact" class="hover:text-primary-light transition-colors">Contact</a>
+            </nav>
+        </div>
+
+        <!-- Category Filters -->
+        <section id="gallery" class="container mx-auto px-4 py-8">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">Photo Gallery</h2>
+
+            <div class="flex flex-wrap justify-center gap-2 mb-8">
+                <button
+                    class="filter-btn active px-4 py-2 rounded-full bg-primary text-white hover:bg-primary-dark transition-colors"
+                    data-category="all">All</button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                    data-category="landscape">Landscape</button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                    data-category="portrait">Portrait</button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                    data-category="wildlife">Wildlife</button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                    data-category="urban">Urban</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Gallery items will be dynamically generated here -->
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="container mx-auto px-4 py-16 flex flex-wrap">
+            <div class="w-full lg:w-1/2 pr-0 lg:pr-16 mb-8 lg:mb-0">
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">About the Photographer</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Hello Guy! I'm savage, a professional photographer
+                    with over 10 years of experience capturing the beauty of our world. My passion for photography began
+                    when I was a teenager, and it has only grown stronger with time.</p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">I specialize in landscape, and portrait
+                    photography, but I'm always open to exploring new styles and subjects. My goal is to capture moments
+                    that tell a story and evoke emotion.</p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">When I'm not behind the camera, you can find me
+                    Chilling, relaxing(because for my life i no like stress)😎, and exploring urban landscapes.
+                </p>
+                <div class="flex space-x-4 mt-8">
+                    <a href="#"
+                        class="text-primary dark:text-primary-light hover:text-primary-dark dark:hover:text-primary"><i
+                            class="fab fa-instagram text-2xl"></i></a>
+                    <a href="#"
+                        class="text-primary dark:text-primary-light hover:text-primary-dark dark:hover:text-primary"><i
+                            class="fab fa-facebook text-2xl"></i></a>
+                    <a href="#"
+                        class="text-primary dark:text-primary-light hover:text-primary-dark dark:hover:text-primary"><i
+                            class="fab fa-twitter text-2xl"></i></a>
+                    <a href="#"
+                        class="text-primary dark:text-primary-light hover:text-primary-dark dark:hover:text-primary"><i
+                            class="fab fa-pinterest text-2xl"></i></a>
+                </div>
+            </div>
+            <div class="w-full lg:w-1/2">
+                <div class="relative h-80 md:h-96 lg:h-128 rounded-lg overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
+                        alt="Photographer" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-gray-100 dark:bg-gray-800 py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">Get in Touch</h2>
+                <div class="max-w-3xl mx-auto bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 dark:text-gray-200 mb-2">Name</label>
+                                <input type="text" id="name" name="name"
+                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 dark:text-gray-200 mb-2">Email</label>
+                                <input type="email" id="email" name="email"
+                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white"
+                                    required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 dark:text-gray-200 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white"
+                                required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 dark:text-gray-200 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-800 dark:text-white"
+                                required></textarea>
+                        </div>
+                        <button type="submit"
+                            class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-medium rounded-lg transition-colors">Send
+                            Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 dark:bg-gray-900 text-white py-8">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold">Savage Photography</h3>
+                        <p class="text-gray-400 mt-1">Capturing life's precious moments</p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="hover:text-primary-light transition-colors">Home</a>
+                        <a href="#gallery" class="hover:text-primary-light transition-colors">Gallery</a>
+                        <a href="#about" class="hover:text-primary-light transition-colors">About</a>
+                        <a href="#contact" class="hover:text-primary-light transition-colors">Contact</a>
+                    </div>
+                </div>
+                <hr class="border-gray-700 my-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">© 2025 Savage Photography. All rights reserved.</p>
+                    <div class="flex space-x-4 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-primary-light"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary-light"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary-light"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-primary-light"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Lightbox -->
+        <div id="lightbox"
+            class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex-col justify-center items-center">
+            <button id="close-lightbox" class="absolute top-4 right-4 text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="relative w-full max-w-4xl px-4">
+                <button id="prev-image"
+                    class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl opacity-70 hover:opacity-100 transition-opacity">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <img id="lightbox-image" src="" alt="Enlarged photo" class="max-h-[80vh] mx-auto">
+                <button id="next-image"
+                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl opacity-70 hover:opacity-100 transition-opacity">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="mt-4 text-white text-center">
+                <h3 id="lightbox-title" class="text-xl font-semibold"></h3>
+                <p id="lightbox-description" class="text-gray-300 mt-2"></p>
+            </div>
+        </div>
+
+        <script>
+            // Check for dark mode preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
+
+            // Listen for changes in color scheme preference
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (event.matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            });
+
+            // Sample gallery data
+            const galleryItems = [
+                {
+                    id: 1,
+                    title: 'Mountain Sunrise',
+                    description: 'Beautiful sunrise over the mountains in Colorado.',
+                    category: 'landscape',
+                    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 2,
+                    title: 'Urban Skyline',
+                    description: 'Night view of the New York City skyline.',
+                    category: 'urban',
+                    imageUrl: 'https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 3,
+                    title: 'Serene Lake',
+                    description: 'Calm waters of Lake Tahoe at sunset.',
+                    category: 'landscape',
+                    imageUrl: 'https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 4,
+                    title: 'Street Photography',
+                    description: 'Life on the streets of Tokyo.',
+                    category: 'urban',
+                    imageUrl: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 5,
+                    title: 'Portrait of Emma',
+                    description: 'Studio portrait with natural lighting.',
+                    category: 'portrait',
+                    imageUrl: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 6,
+                    title: 'Lion in the Wild',
+                    description: 'Majestic lion photographed during safari in Kenya.',
+                    category: 'wildlife',
+                    imageUrl: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 7,
+                    title: 'Desert Landscape',
+                    description: 'Sunrise at the Great Sand Dunes National Park.',
+                    category: 'landscape',
+                    imageUrl: 'https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 8,
+                    title: 'Business Portrait',
+                    description: 'Professional headshot for corporate use.',
+                    category: 'portrait',
+                    imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 9,
+                    title: 'Fox in Winter',
+                    description: 'Red fox spotted in a snowy forest.',
+                    category: 'wildlife',
+                    imageUrl: 'https://images.unsplash.com/photo-1516934024742-b461fba47600?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 10,
+                    title: 'City Architecture',
+                    description: 'Modern architectural marvel in Singapore.',
+                    category: 'urban',
+                    imageUrl: 'https://images.unsplash.com/photo-1496568816309-51d7c20e3b21?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 11,
+                    title: 'Waterfall Hike',
+                    description: 'Hidden waterfall discovered during a forest hike.',
+                    category: 'landscape',
+                    imageUrl: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                },
+                {
+                    id: 12,
+                    title: 'Elephant Family',
+                    description: 'Mother and baby elephant walking across the savannah.',
+                    category: 'wildlife',
+                    imageUrl: 'https://images.unsplash.com/photo-1549366021-9f761d450615?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
+                }
+            ];
+
+            // DOM elements
+            const galleryGrid = document.querySelector('#gallery .grid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const themeToggle = document.getElementById('theme-toggle');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMenuButton = document.getElementById('close-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxDescription = document.getElementById('lightbox-description');
+            const closeLightboxButton = document.getElementById('close-lightbox');
+            const prevImageButton = document.getElementById('prev-image');
+            const nextImageButton = document.getElementById('next-image');
+            const contactForm = document.getElementById('contact-form');
+
+            // Theme toggling
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+            });
+
+            // Mobile menu handling
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                document.body.style.overflow = '';
+            });
+
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Initialize gallery
+            function renderGallery(category = 'all') {
+                galleryGrid.innerHTML = '';
+
+                const filteredItems = category === 'all'
+                    ? galleryItems
+                    : galleryItems.filter(item => item.category === category);
+
+                filteredItems.forEach(item => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'group relative cursor-pointer overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl';
+                    galleryItem.innerHTML = `
+                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                        <h3 class="text-white text-lg font-bold">${item.title}</h3>
+                        <p class="text-gray-200 text-sm mt-1 line-clamp-2">${item.description}</p>
+                    </div>
+                `;
+
+                    galleryItem.setAttribute('data-id', item.id);
+                    galleryItem.addEventListener('click', () => openLightbox(item.id));
+
+                    galleryGrid.appendChild(galleryItem);
+                });
+            }
+
+            // Filter handling
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-primary', 'text-white');
+                        btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-gray-800', 'dark:text-white');
+                    });
+
+                    // Add active class to clicked button
+                    this.classList.add('active', 'bg-primary', 'text-white');
+                    this.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'text-gray-800', 'dark:text-white');
+
+                    // Filter gallery
+                    const category = this.getAttribute('data-category');
+                    renderGallery(category);
+                });
+            });
+
+            // Lightbox functionality
+            let currentImageIndex = 0;
+
+            function openLightbox(imageId) {
+                const imageIndex = galleryItems.findIndex(item => item.id === imageId);
+                if (imageIndex === -1) return;
+
+                currentImageIndex = imageIndex;
+                updateLightboxContent();
+
+                lightbox.classList.remove('hidden');
+                lightbox.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function updateLightboxContent() {
+                const currentImage = galleryItems[currentImageIndex];
+                lightboxImage.src = currentImage.imageUrl;
+                lightboxTitle.textContent = currentImage.title;
+                lightboxDescription.textContent = currentImage.description;
+            }
+
+            function nextImage() {
+                currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+                updateLightboxContent();
+            }
+
+            function prevImage() {
+                currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+                updateLightboxContent();
+            }
+
+            closeLightboxButton.addEventListener('click', () => {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                document.body.style.overflow = '';
+            });
+
+            prevImageButton.addEventListener('click', prevImage);
+            nextImageButton.addEventListener('click', nextImage);
+
+            // Keyboard navigation for lightbox
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('hidden')) return;
+
+                if (e.key === 'Escape') {
+                    lightbox.classList.add('hidden');
+                    lightbox.classList.remove('flex');
+                    document.body.style.overflow = '';
+                } else if (e.key === 'ArrowRight') {
+                    nextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    prevImage();
+                }
+            });
+
+            // Contact form handling
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                // In a real app, you would send the form data to your backend
+                const formData = new FormData(this);
+                console.log('Form submitted:');
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+
+                // Show a thank you message
+                this.innerHTML = `
+                <div class="text-center py-8">
+                    <i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Thank You!</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Your message has been sent successfully. I'll get back to you soon.</p>
+                </div>
+            `;
+            });
+
+            // Initialize the gallery on load
+            document.addEventListener('DOMContentLoaded', function () {
+                renderGallery();
+            });
+        </script>
+    </body>
+
+</html>
