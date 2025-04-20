@@ -89,7 +89,7 @@
         <section id="gallery" class="container mx-auto px-4 py-8">
             <h2 class="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">Photo Gallery</h2>
 
-            <div class="flex flex-wrap justify-center gap-2 mb-8">
+            <!-- <div class="flex flex-wrap justify-center gap-2 mb-8">
                 <button
                     class="filter-btn active px-4 py-2 rounded-full bg-primary text-white hover:bg-primary-dark transition-colors"
                     data-category="all">All</button>
@@ -105,26 +105,38 @@
                 <button
                     class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
                     data-category="urban">Urban</button>
-            </div>
+            </div>-->
 
             <!-- Gallery Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <!-- Gallery items will be dynamically generated here -->
+            </div>
+            <div class="flex flex-wrap justify-center gap-2 mt-6 mb-8">
+
+                <button
+                    class="filter-btn  px-12 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-primary-dark dark:hover:bg-primary-dark transition-colors"
+                    data-category="urban">More ..</button>
             </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="container mx-auto px-4 py-16 flex flex-wrap">
             <div class="w-full lg:w-1/2 pr-0 lg:pr-16 mb-8 lg:mb-0">
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">About the Photographer</h2>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">Hello Guy! I'm savage, a professional photographer
-                    with over 10 years of experience capturing the beauty of our world. My passion for photography began
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">About the Photographer
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Hello Guy! I'm savage, a professional
+                    photographer
+                    with over 10 years of experience capturing the beauty of our world. My passion for
+                    photography began
                     when I was a teenager, and it has only grown stronger with time.</p>
                 <p class="text-gray-600 dark:text-gray-300 mb-4">I specialize in landscape, and portrait
-                    photography, but I'm always open to exploring new styles and subjects. My goal is to capture moments
+                    photography, but I'm always open to exploring new styles and subjects. My goal is to
+                    capture moments
                     that tell a story and evoke emotion.</p>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">When I'm not behind the camera, you can find me
-                    Chilling, relaxing(because for my life i no like stress)😎, and exploring urban landscapes.
+                <p class="text-gray-600 dark:text-gray-300 mb-4">When I'm not behind the camera, you can
+                    find me
+                    Chilling, relaxing(because for my life i no like stress)😎, and exploring urban
+                    landscapes.
                 </p>
                 <div class="flex space-x-4 mt-8">
                     <a href="#"
@@ -152,7 +164,8 @@
         <!-- Contact Section -->
         <section id="contact" class="bg-gray-100 dark:bg-gray-800 py-16">
             <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">Get in Touch</h2>
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white text-center mb-8">Get in Touch
+                </h2>
                 <div class="max-w-3xl mx-auto bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8">
                     <form id="contact-form" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -239,7 +252,7 @@
                 <p id="lightbox-description" class="text-gray-300 mt-2"></p>
             </div>
         </div>
-
+        <script src='jquery-1.11.0.min.js'></script>
         <script>
             // Check for dark mode preference
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -256,7 +269,7 @@
             });
 
             // Sample gallery data
-            const galleryItems = [
+            const galleryItems1 = [
                 {
                     id: 1,
                     title: 'Mountain Sunrise',
@@ -342,7 +355,31 @@
                     imageUrl: 'https://images.unsplash.com/photo-1549366021-9f761d450615?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80'
                 }
             ];
+            let galleryItems = [];
 
+            $(document).ready(function () {
+
+                ApiCall();
+            });
+            ///Api call for image upload
+            //Api endpiont for geting images
+            function ApiCall(params) {
+
+                $.ajax({
+                    url: 'https://bestwale.pythonanywhere.com/gallery/images/',
+                    type: 'GET',
+
+                    success: function (response) {
+                        console.log('Image data:', response);
+                        renderGallery(category = 'all', response);
+                    },
+                    error: function (xhr) {
+                        console.error('Error fetching images:', xhr.responseText);
+                    }
+                });
+
+
+            }
             // DOM elements
             const galleryGrid = document.querySelector('#gallery .grid');
             const filterButtons = document.querySelectorAll('.filter-btn');
@@ -403,70 +440,77 @@
             });
 
             // Initialize gallery
-            function renderGallery(category = 'all') {
+            function renderGallery(category = 'all', galleryItems) {
                 galleryGrid.innerHTML = '';
 
-                const filteredItems = category === 'all'
+                /*const filteredItems = category === 'all'
                     ? galleryItems
-                    : galleryItems.filter(item => item.category === category);
+                    : galleryItems.filter(item => item.category === category);*/
 
-                filteredItems.forEach(item => {
+                galleryItems.forEach(item => {
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'group relative cursor-pointer overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl';
                     galleryItem.innerHTML = `
-                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="https://bestwale.pythonanywhere.com/${item.url}" alt="${item.title}" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                         <h3 class="text-white text-lg font-bold">${item.title}</h3>
                         <p class="text-gray-200 text-sm mt-1 line-clamp-2">${item.description}</p>
                     </div>
                 `;
-
+                    console.log(item.id)
                     galleryItem.setAttribute('data-id', item.id);
-                    galleryItem.addEventListener('click', () => openLightbox(item.id));
+                    galleryItem.addEventListener('click', () => openLightbox(item.id, galleryItems));
 
                     galleryGrid.appendChild(galleryItem);
                 });
             }
 
             // Filter handling
-            filterButtons.forEach(button => {
+            /*filterButtons.forEach(button => {
                 button.addEventListener('click', function () {
                     // Remove active class from all buttons
                     filterButtons.forEach(btn => {
                         btn.classList.remove('active', 'bg-primary', 'text-white');
                         btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-gray-800', 'dark:text-white');
                     });
-
+ 
                     // Add active class to clicked button
                     this.classList.add('active', 'bg-primary', 'text-white');
                     this.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'text-gray-800', 'dark:text-white');
-
+ 
                     // Filter gallery
                     const category = this.getAttribute('data-category');
                     renderGallery(category);
                 });
-            });
+            });*/
 
             // Lightbox functionality
             let currentImageIndex = 0;
 
-            function openLightbox(imageId) {
-                const imageIndex = galleryItems.findIndex(item => item.id === imageId);
-                if (imageIndex === -1) return;
+            function openLightbox(imageId, galleryItems) {
+                console.log('filteee', imageId)
 
-                currentImageIndex = imageIndex;
-                updateLightboxContent();
+
+
+
+                currentImageIndex = imageId;
+                updateLightboxContent(galleryItems);
 
                 lightbox.classList.remove('hidden');
                 lightbox.classList.add('flex');
                 document.body.style.overflow = 'hidden';
             }
 
-            function updateLightboxContent() {
-                const currentImage = galleryItems[currentImageIndex];
-                lightboxImage.src = currentImage.imageUrl;
-                lightboxTitle.textContent = currentImage.title;
-                lightboxDescription.textContent = currentImage.description;
+            function updateLightboxContent(galleryItems) {
+                const currentImage = galleryItems;
+                const love = currentImage[currentImageIndex]
+                console.log(currentImage)
+                console.log(currentImageIndex)
+
+
+                lightboxImage.src = 'https://bestwale.pythonanywhere.com' + love.url;
+                lightboxTitle.textContent = love.title;
+                lightboxDescription.textContent = love.description;
             }
 
             function nextImage() {

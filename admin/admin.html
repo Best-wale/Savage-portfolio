@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Photography Admin Dashboard</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <script src="plugin.js"></script>
+    </head>
+
+    <body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-200">
+        <!-- Check for dark mode -->
+        <script src="theme.js"></script>
+        <!--loader-->
+        <div id="login-loader"
+            class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div class="loader border-t-4 border-primary rounded-full w-12 h-12 animate-spin"></div>
+        </div>
+
+        <!-- Signup Screen -->
+        <div id="signup-screen" class="flex items-center justify-center min-h-screen p-4 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-primary">Photo<span
+                            class="text-gray-800 dark:text-white">Admin</span></h1>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">Sign up into photography portfolio</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="username"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
+                        <input type="text" id="username"
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base"
+                            placeholder="username">
+                    </div>
+
+                    <div>
+                        <label for="email"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                        <input type="email" id="email"
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base"
+                            placeholder="photographer@example.com">
+                    </div>
+
+                    <div>
+                        <label for="password"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+                        <input type="password" id="password"
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base"
+                            placeholder="••••••••">
+                    </div>
+                    <div>
+                        <label for="password-confirm"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Confirm
+                            Password</label>
+                        <input type="password" id="password-confirm"
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base"
+                            placeholder="••••••••">
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" id="terms"
+                            class="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary dark:focus:ring-primary dark:border-gray-600">
+                        <label for="terms" class="ml-2 text-sm text-gray-700 dark:text-gray-300">I agree to the <a
+                                href="#" class="text-primary hover:underline">terms and conditions</a></label>
+                    </div>
+
+
+                    <button id="signup-btn"
+                        class="w-full bg-primary hover:bg-opacity-90 text-white font-medium py-3 px-4 rounded-md transition-all">
+                        Sign up
+                    </button>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 text-center mt-4">
+                        Already have an account? <a id="login-goto"
+                            class="text-primary hover:underline cursor-default hover:cursor-pointer">login</a>
+                        here.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Login Screen -->
+        <div id="login-screen" class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-primary">Photo<span
+                            class="text-gray-800 dark:text-white">Admin</span></h1>
+                    <p class="text-gray-600 dark:text-gray-300 mt-2">Manage your photography portfolio</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="loginUsername"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
+                        <input type="text" id="loginUsername"
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base"
+                            placeholder="photographer@example.com">
+                    </div>
+
+                    <div>
+                        <label for="password"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+                        <input type="password" id="loginPassword"
+                            class="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base"
+                            placeholder="••••••••">
+                    </div>
+
+                    <button id="login-btn"
+                        class="w-full bg-primary hover:bg-opacity-90 text-white font-medium py-3 px-4 rounded-md transition-all">
+                        Sign In
+                    </button>
+
+                    <p class="text-sm text-gray-500 dark:text-gray-400 text-center mt-4">
+                        Don't have an account? <a id="signup-goto"
+                            class="text-primary hover:underline cursor-default hover:cursor-pointer">Sign up</a>
+                        here.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Main Dashboard -->
+        <div id="dashboard" class="hidden">
+            <!-- Sidebar and Content Layout -->
+            <div class="flex flex-col md:flex-row min-h-screen">
+                <!-- Sidebar -->
+                <aside class="w-full md:w-64 bg-white dark:bg-gray-800 shadow-md md:min-h-screen">
+                    <div class="p-4 flex justify-between items-center md:block">
+                        <div class="flex items-center space-x-2">
+                            <h1 class="text-2xl font-bold text-primary">Photo<span
+                                    class="text-gray-800 dark:text-white">Admin</span></h1>
+                        </div>
+                        <button id="mobile-menu-btn" class="md:hidden text-gray-700 dark:text-gray-300">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+
+                    <div id="sidebar-menu" class="hidden md:block">
+                        <div class="p-4">
+                            <div class="flex flex-col space-y-1">
+                                <button
+                                    class="nav-btn active flex items-center space-x-2 px-4 py-3 rounded-md bg-primary bg-opacity-10 text-primary"
+                                    data-target="gallery">
+                                    <i class="fas fa-images w-5"></i>
+                                    <span>Gallery</span>
+                                </button>
+                                <button
+                                    class="nav-btn flex items-center space-x-2 px-4 py-3 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    data-target="upload">
+                                    <i class="fas fa-upload w-5"></i>
+                                    <span>Upload</span>
+                                </button>
+                                <button
+                                    class="nav-btn flex items-center space-x-2 px-4 py-3 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    data-target="settings">
+                                    <i class="fas fa-cog w-5"></i>
+                                    <span>Settings</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 dark:border-gray-700 p-4">
+                            <div class="flex items-center space-x-2">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <p id='usernameDetail' class="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Admin User</p>
+                                    <p id="emailDetail" class="text-xs text-gray-500 dark:text-gray-400">
+                                        admin@photos.com</p>
+                                </div>
+                            </div>
+                            <button id="logout-btn"
+                                class="mt-4 w-full flex items-center justify-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="flex-1 p-4 md:p-6">
+                    <!-- Gallery View -->
+                    <div id="gallery-view" class="content-view">
+                        <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between">
+                            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4 md:mb-0">Photo Gallery</h2>
+                            <div class="flex space-x-2">
+                                <div class="relative">
+                                    <input type="text" id="search-gallery" placeholder="Search photos..."
+                                        class="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base">
+                                    <button class="absolute right-2 top-2 text-gray-400">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <select id="filter-gallery"
+                                    class="px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base">
+                                    <option value="all">All Photos</option>
+                                    <option value="recent">Recent</option>
+                                    <option value="landscape">Landscape</option>
+                                    <option value="portrait">Portrait</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="gallery-grid"
+                            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <!-- Gallery will be populated dynamically -->
+                            <div
+                                class="flex items-center justify-center h-64 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse">
+                                <span class="text-gray-400 dark:text-gray-500">Loading...</span>
+                            </div>
+                        </div>
+
+                        <div id="empty-gallery" class="hidden py-12 text-center">
+                            <div
+                                class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
+                                <i class="fas fa-image text-2xl text-gray-400 dark:text-gray-500"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-gray-900 dark:text-white">No images yet</h3>
+                            <p class="mt-2 text-gray-500 dark:text-gray-400">Get started by uploading your first image.
+                            </p>
+                            <button class="mt-4 px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90"
+                                onclick="document.querySelector('[data-target=upload]').click()">
+                                Upload Now
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Upload View -->
+                    <div id="upload-view" class="content-view hidden">
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Upload Photos</h2>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                            <div id="upload-area"
+                                class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-primary dark:hover:border-primary transition-colors">
+                                <input type="file" id="file-input" accept="image/*" multiple class="hidden">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 dark:text-gray-500 mb-4"></i>
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Drag photos here</h3>
+                                <p class="mt-2 text-gray-500 dark:text-gray-400">or click to browse</p>
+                                <button id="browse-btn"
+                                    class="mt-4 px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90">
+                                    Select Files
+                                </button>
+                            </div>
+
+                            <div id="upload-preview" class="mt-6 hidden">
+                                <h4 class="font-medium text-gray-800 dark:text-white mb-2">Selected Files</h4>
+                                <div id="preview-list" class="space-y-2">
+                                    <!-- Will be populated with selected files -->
+                                </div>
+                                <div class="mt-4 flex space-x-2">
+                                    <button id="upload-files-btn"
+                                        class="px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90">
+                                        Upload Files
+                                    </button>
+                                    <button id="cancel-upload-btn"
+                                        class="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="upload-progress" class="mt-6 hidden">
+                                <h4 class="font-medium text-gray-800 dark:text-white mb-2">Uploading...</h4>
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                    <div id="progress-bar" class="bg-primary h-2.5 rounded-full" style="width: 0%">
+                                    </div>
+                                </div>
+                                <p id="progress-text" class="text-sm text-gray-500 dark:text-gray-400 mt-1">0%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings View -->
+                    <div id="settings-view" class="content-view hidden">
+                        <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Account Settings</h2>
+
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                            <h3 class="text-lg font-medium text-gray-800 dark:text-white mb-4">Profile Information</h3>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="display-name"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Display
+                                        Name</label>
+                                    <input type="text" id="display-name" value="Admin User"
+                                        class="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base">
+                                </div>
+
+                                <div>
+                                    <label for="profile-email"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                                    <input type="email" id="profile-email" value="admin@photos.com"
+                                        class="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base">
+                                </div>
+
+                                <div>
+                                    <label for="bio"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bio</label>
+                                    <textarea id="bio" rows="3"
+                                        class="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base">Professional photographer with 10+ years of experience in landscape and portrait photography.</textarea>
+                                </div>
+
+                                <button id="save-profile-btn"
+                                    class="px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90">
+                                    Save Changes
+                                </button>
+                            </div>
+
+                            <hr class="my-6 border-gray-200 dark:border-gray-700">
+
+                            <h3 class="text-lg font-medium text-gray-800 dark:text-white mb-4">Portfolio Settings</h3>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="portfolio-title"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Portfolio
+                                        Title</label>
+                                    <input type="text" id="portfolio-title" value="My Photography Portfolio"
+                                        class="w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base">
+                                </div>
+
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Portfolio
+                                        Visibility</label>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center">
+                                            <input type="radio" name="visibility" value="public" checked
+                                                class="w-4 h-4 text-primary">
+                                            <span class="ml-2 text-gray-700 dark:text-gray-300">Public</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="radio" name="visibility" value="private"
+                                                class="w-4 h-4 text-primary">
+                                            <span class="ml-2 text-gray-700 dark:text-gray-300">Private</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button id="save-portfolio-btn"
+                                    class="px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90">
+                                    Save Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Image Details Modal -->
+        <div id="image-modal"
+            class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-hidden">
+                <div class="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700">
+                    <h3 id="modal-title" class="text-lg font-medium text-gray-800 dark:text-white">Image Details</h3>
+                    <button id="close-modal"
+                        class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="p-4 overflow-y-auto" style="max-height: calc(90vh - 120px);">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="md:w-2/3">
+                            <img id="modal-image" src="" alt="Selected image" class="w-full h-auto rounded-lg">
+                        </div>
+                        <div class="md:w-1/3 space-y-4">
+                            <div>
+                                <label for="image-title"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
+                                <input type="text" id="image-title"
+                                    class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base">
+                            </div>
+
+                            <div>
+                                <label for="image-description"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                                <textarea id="image-description" rows="3"
+                                    class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base"></textarea>
+                            </div>
+
+                            <div>
+                                <label for="image-category"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
+                                <select id="image-category"
+                                    class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white text-base">
+                                    <option value="landscape">Landscape</option>
+                                    <option value="portrait">Portrait</option>
+                                    <option value="street">Street</option>
+                                    <option value="nature">Nature</option>
+                                    <option value="architecture">Architecture</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="pt-2">
+                                <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Image Details</p>
+                                <div class="grid grid-cols-2 gap-2 text-sm">
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded">
+                                        <span class="text-gray-500 dark:text-gray-400">Dimensions:</span>
+                                        <span id="image-dimensions"
+                                            class="block font-medium text-gray-800 dark:text-white">0 x 0</span>
+                                    </div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded">
+                                        <span class="text-gray-500 dark:text-gray-400">File Size:</span>
+                                        <span id="image-size" class="block font-medium text-gray-800 dark:text-white">0
+                                            KB</span>
+                                    </div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded">
+                                        <span class="text-gray-500 dark:text-gray-400">Type:</span>
+                                        <span id="image-type"
+                                            class="block font-medium text-gray-800 dark:text-white">-</span>
+                                    </div>
+                                    <div class="bg-gray-100 dark:bg-gray-700 p-2 rounded">
+                                        <span class="text-gray-500 dark:text-gray-400">Uploaded:</span>
+                                        <span id="image-date"
+                                            class="block font-medium text-gray-800 dark:text-white">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-2 p-4 border-t border-gray-200 dark:border-gray-700">
+                    <button id="delete-image-btn" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600">
+                        Delete
+                    </button>
+                    <button id="save-image-btn" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-opacity-90">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="toast"
+            class="fixed bottom-4 right-4 bg-gray-900 text-white px-4 py-3 rounded-lg shadow-lg transform translate-y-full opacity-0 transition-all duration-300 flex items-center z-50">
+            <i id="toast-icon" class="fas fa-check-circle mr-2"></i>
+            <span id="toast-message">Notification message</span>
+        </div>
+        <script src="../jquery-1.11.0.min.js"></script>
+        <script src="main.js"></script>
+
+    </body>
+
+</html>
